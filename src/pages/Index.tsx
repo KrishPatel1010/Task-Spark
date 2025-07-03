@@ -1,14 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState, useEffect } from 'react';
+import Login from '@/components/Login';
+import TaskDashboard from '@/components/TaskDashboard';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [username, setUsername] = useState<string | null>(null);
+
+  // Check for existing login on component mount
+  useEffect(() => {
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+      setUsername(savedUsername);
+    }
+  }, []);
+
+  const handleLogin = (user: string) => {
+    localStorage.setItem('username', user);
+    setUsername(user);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    setUsername(null);
+  };
+
+  if (!username) {
+    return <Login onLogin={handleLogin} />;
+  }
+
+  return <TaskDashboard username={username} onLogout={handleLogout} />;
 };
 
 export default Index;
