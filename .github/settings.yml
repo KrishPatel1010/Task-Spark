@@ -1,0 +1,4 @@
+repository:
+  contributors:
+    excluded:
+      - lovable-dev[bot]
