@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Plus, LogOut, User, Zap, TrendingUp, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -35,6 +34,10 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
     localStorage.setItem(`tasks_${username}`, JSON.stringify(tasks));
   }, [tasks, username]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const addTask = (title: string, description: string, dueDate: string, priority: PriorityType, category: string) => {
     const newTask: Task = {
       id: Date.now().toString(),
@@ -57,10 +60,10 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
 
   const editTask = (taskId: string, title: string, description: string, dueDate: string, priority: PriorityType, category: string) => {
     setTasks(tasks.map(task =>
-      task.id === taskId ? { 
-        ...task, 
-        title, 
-        description, 
+      task.id === taskId ? {
+        ...task,
+        title,
+        description,
         dueDate: dueDate || undefined,
         priority,
         category
@@ -81,7 +84,7 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
   const completionPercentage = tasks.length > 0 ? Math.round((taskCounts.completed / tasks.length) * 100) : 0;
 
   // Get overdue tasks count
-  const overdueTasks = tasks.filter(task => 
+  const overdueTasks = tasks.filter(task =>
     task.dueDate && new Date(task.dueDate) < new Date() && !task.completed
   ).length;
 
@@ -111,24 +114,24 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
                 <User className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className={`text-3xl font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  Welcome back, {username}! 
+                <h1 className={`text-3xl font-bold mb-1 bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent drop-shadow-[0_2px_8px_hsl(var(--neon-blue)/0.15)] transition-all duration-500`}>
+                  Welcome back, {username}!
                   <span className="ml-2 animate-pulse">✨</span>
                 </h1>
-                <p className={`text-lg ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                <p className={`text-lg text-[hsl(var(--neon-blue))] dark:text-[hsl(var(--neon-purple))] transition-all duration-500`}>
                   Ready to conquer your tasks today?
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-4">
               {/* Progress indicator */}
-              <div className="glass rounded-xl p-4 text-center">
+              <div className="glass rounded-xl p-4 text-center transition-all duration-500">
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-4 h-4 text-neon-blue" />
-                  <span className={`text-sm font-medium ${isDark ? 'text-white/80' : 'text-gray-700'}`}>Progress</span>
+                  <TrendingUp className="w-4 h-4 text-[hsl(var(--neon-blue))]" />
+                  <span className="text-sm font-medium text-[hsl(var(--neon-blue))] dark:text-[hsl(var(--neon-purple))]">Progress</span>
                 </div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
+                <div className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent drop-shadow-[0_2px_8px_hsl(var(--neon-blue)/0.15)]">
                   {completionPercentage}%
                 </div>
               </div>
@@ -156,7 +159,7 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
               </div>
               <div>
                 <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{taskCounts.all}</div>
-                <div className={`${isDark ? 'text-white/70' : 'text-gray-600'}`}>Total Tasks</div>
+                <div className={`${isDark ? 'text-white/70' : 'text-gray-800'}`}>Total Tasks</div>
               </div>
             </div>
           </div>
@@ -168,7 +171,7 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
               </div>
               <div>
                 <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{taskCounts.pending}</div>
-                <div className={`${isDark ? 'text-white/70' : 'text-gray-600'}`}>Pending</div>
+                <div className={`${isDark ? 'text-white/70' : 'text-gray-800'}`}>Pending</div>
               </div>
             </div>
           </div>
@@ -180,7 +183,7 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
               </div>
               <div>
                 <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{taskCounts.completed}</div>
-                <div className={`${isDark ? 'text-white/70' : 'text-gray-600'}`}>Completed</div>
+                <div className={`${isDark ? 'text-white/70' : 'text-gray-800'}`}>Completed</div>
               </div>
             </div>
           </div>
@@ -192,7 +195,7 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
               </div>
               <div>
                 <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{overdueTasks}</div>
-                <div className={`${isDark ? 'text-white/70' : 'text-gray-600'}`}>Overdue</div>
+                <div className={`${isDark ? 'text-white/70' : 'text-gray-800'}`}>Overdue</div>
               </div>
             </div>
           </div>
@@ -209,10 +212,10 @@ const TaskDashboard: React.FC<TaskDashboardProps> = ({ username, onLogout }) => 
                 taskCounts={taskCounts}
               />
             </div>
-            
+
             <Button
               onClick={() => setIsFormOpen(true)}
-              className="bg-aurora-gradient hover:shadow-lg hover:shadow-neon-purple/25 rounded-xl text-white font-semibold px-8 py-3 transition-all duration-300 transform hover:scale-105 animate-pulse-neon"
+              className="bg-aurora-gradient hover:shadow-lg hover:shadow-neon-purple/25 rounded-xl text-white font-semibold px-8 py-3 transition-all duration-300 transform hover:scale-105"
             >
               <Plus className="w-5 h-5 mr-2" />
               New Task

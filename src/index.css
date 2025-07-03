@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -47,6 +46,13 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --neon-blue: 222 100% 60%;
+    --neon-purple: 270 100% 70%;
+    --neon-pink: 320 100% 65%;
+    --neon-green: 140 100% 60%;
+    --neon-yellow: 50 100% 60%;
+    --neon-orange: 30 100% 60%;
   }
 
   .dark {
@@ -85,6 +91,13 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --neon-blue: 222 100% 70%;
+    --neon-purple: 270 100% 80%;
+    --neon-pink: 320 100% 75%;
+    --neon-green: 140 100% 70%;
+    --neon-yellow: 50 100% 70%;
+    --neon-orange: 30 100% 70%;
   }
 }
 
@@ -110,26 +123,36 @@ All colors MUST be HSL.
 
 /* Glass morphism effects */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 32px 0 rgba(80, 80, 200, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .glass {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 30, 60, 0.45);
+  border: 1.5px solid rgba(80, 80, 200, 0.18);
+  box-shadow: 0 4px 32px 0 rgba(80, 80, 200, 0.12);
 }
 
 .light .glass {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(80, 80, 200, 0.18);
+  box-shadow: 0 4px 32px 0 rgba(80, 80, 200, 0.10);
 }
 
 .glass-dark {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 32px 0 rgba(80, 80, 200, 0.10);
+}
+
+.glass-white {
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 12px 0 rgba(80, 80, 200, 0.08);
 }
 
 /* Floating particles background */
@@ -196,12 +219,15 @@ All colors MUST be HSL.
     transform: scale(0.3) rotate(-45deg);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1) rotate(0deg);
     opacity: 1;
@@ -213,6 +239,7 @@ All colors MUST be HSL.
     transform: translateY(60px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -220,9 +247,12 @@ All colors MUST be HSL.
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(139, 92, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.4);
   }

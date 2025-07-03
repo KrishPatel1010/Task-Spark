@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { List, CheckCircle, Clock, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,7 +21,7 @@ const TaskFilter: React.FC<TaskFilterProps> = ({
   taskCounts,
 }) => {
   const { isDark } = useTheme();
-  
+
   const filters = [
     {
       key: 'all' as FilterType,
@@ -48,41 +47,23 @@ const TaskFilter: React.FC<TaskFilterProps> = ({
   ];
 
   return (
-    <div className="flex flex-wrap gap-3">
-      {filters.map((filter) => {
-        const Icon = filter.icon;
-        const isActive = activeFilter === filter.key;
-        
-        return (
-          <Button
-            key={filter.key}
-            onClick={() => onFilterChange(filter.key)}
-            className={`relative flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 ${
-              isActive
-                ? `bg-gradient-to-r ${filter.gradient} text-white shadow-lg hover:shadow-xl`
-                : isDark 
-                  ? 'glass text-white/80 hover:text-white hover:bg-white/10'
-                  : 'bg-white/20 text-gray-700 hover:text-gray-900 hover:bg-white/30'
-            }`}
-          >
-            <Icon className="w-5 h-5" />
-            <span className="font-medium">{filter.label}</span>
-            <span className={`px-2 py-1 rounded-full text-xs font-bold ${
-              isActive 
-                ? 'bg-white/20 text-white' 
-                : isDark
-                  ? 'bg-white/10 text-white/70'
-                  : 'bg-gray-200 text-gray-600'
-            }`}>
-              {filter.count}
-            </span>
-            
-            {isActive && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
-            )}
-          </Button>
-        );
-      })}
+    <div className="flex flex-row items-center gap-2 justify-center">
+      {(['all', 'completed', 'pending'] as FilterType[]).map((filter) => (
+        <button
+          key={filter}
+          className={`px-4 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--neon-blue))] focus:ring-offset-2
+            ${activeFilter === filter
+              ? 'bg-[hsl(var(--neon-blue))] text-black dark:bg-[hsl(var(--neon-purple))] dark:text-white'
+              : 'bg-transparent text-gray-600 dark:text-gray-300 hover:bg-[hsl(var(--neon-blue)/0.1)] dark:hover:bg-[hsl(var(--neon-purple)/0.1)]'}
+          `}
+          onClick={() => onFilterChange(filter)}
+        >
+          {filter.charAt(0).toUpperCase() + filter.slice(1)}
+          {taskCounts[filter] !== undefined && (
+            <span className="ml-2 text-xs font-normal opacity-70">({taskCounts[filter]})</span>
+          )}
+        </button>
+      ))}
     </div>
   );
 };

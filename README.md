@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
+# Personal Task Tracker
 
-## Project info
+## 📖 Description
+A modern, responsive personal task management app built with React. Easily add, edit, delete, and filter your tasks. Features include search, priorities, due dates, categories, dark mode, and smooth animations.
 
-**URL**: https://lovable.dev/projects/f9aa70cf-4fc5-46b3-b1f1-76e7e2f9f210
+## 🚀 Features
+- Simple login (username only, stored in localStorage)
+- Add, edit, delete, and complete tasks
+- Inline editing and custom delete confirmation
+- Task filtering: All, Completed, Pending (with counts)
+- Search tasks by title, description, or category
+- Task priorities (High, Medium, Low)
+- Due dates and categories/tags
+- Data persistence with localStorage
+- Responsive design (mobile & desktop)
+- Dark mode toggle
+- Smooth animations and modern UI
 
-## How can I edit this code?
+## 🛠 Setup Instructions
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm start`
+4. Open [http://localhost:3000](http://localhost:3000)
 
-There are several ways of editing your application.
+## 🧰 Technologies Used
+- React.js (functional components & hooks)
+- Tailwind CSS
+- TypeScript
 
-**Use Lovable**
+## 🔗 Live Demo
+[Add your deployed app link here]
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f9aa70cf-4fc5-46b3-b1f1-76e7e2f9f210) and start prompting.
+## 🖼 Screenshots
+![Login Page](screenshots/login.png)
+![Dashboard](screenshots/dashboard.png)
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## 📦 Project Structure
+```
+task-tracker/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Login.tsx
+│   │   ├── TaskForm.tsx
+│   │   ├── TaskItem.tsx
+│   │   ├── TaskList.tsx
+│   │   ├── TaskFilter.tsx
+│   │   └── SearchBar.tsx
+│   ├── contexts/
+│   │   └── ThemeContext.tsx
+│   ├── types/
+│   │   └── Task.ts
+│   ├── App.tsx
+│   └── index.tsx
+├── README.md
+└── package.json
 ```
 
-**Edit a file directly in GitHub**
+## 🧪 Sample Data
+```js
+const sampleTasks = [
+  {
+    id: 1,
+    title: "Complete React assignment",
+    description: "Build a task tracker application",
+    completed: false,
+    createdAt: "2024-01-15T10:00:00Z"
+  },
+  {
+    id: 2,
+    title: "Review JavaScript concepts",
+    description: "Go through ES6+ features",
+    completed: true,
+    createdAt: "2024-01-14T15:30:00Z"
+  }
+];
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f9aa70cf-4fc5-46b3-b1f1-76e7e2f9f210) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🧠 Evaluation
+- Clean, readable code
+- Responsive, user-friendly UI
+- All core and bonus features implemented
+- No external state management
+- LocalStorage for persistence
+- Well-structured and documented

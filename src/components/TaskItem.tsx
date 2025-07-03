@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Check, Edit, Trash2, Clock, Calendar, Flag, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,6 +20,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   onDeleteTask,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [editTitle, setEditTitle] = useState(task.title);
   const [editDescription, setEditDescription] = useState(task.description);
   const [editDueDate, setEditDueDate] = useState(task.dueDate || '');
@@ -69,18 +69,16 @@ const TaskItem: React.FC<TaskItemProps> = ({
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && !task.completed;
 
   return (
-    <div className={`glass rounded-2xl p-6 transition-all duration-500 hover:shadow-lg hover:shadow-neon-blue/10 animate-slideInLeft group ${
-      task.completed ? 'opacity-75' : ''
-    } ${isOverdue ? 'border-red-400/50' : ''}`}>
+    <div className={`glass rounded-2xl p-6 transition-all duration-500 hover:shadow-lg hover:shadow-neon-blue/10 animate-slideInLeft group ${task.completed ? 'opacity-75' : ''
+      } ${isOverdue ? 'border-red-400/50' : ''}`}>
       {/* Completion indicator */}
       <div className="flex items-start gap-4">
         <Button
           onClick={() => onToggleComplete(task.id)}
-          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-            task.completed
-              ? 'bg-gradient-to-r from-green-400 to-green-600 border-green-400 shadow-lg shadow-green-400/25'
-              : 'border-white/30 hover:border-neon-blue hover:shadow-lg hover:shadow-neon-blue/25 bg-transparent'
-          }`}
+          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${task.completed
+            ? 'bg-gradient-to-r from-green-400 to-green-600 border-green-400 shadow-lg shadow-green-400/25'
+            : 'border-white/30 hover:border-neon-blue hover:shadow-lg hover:shadow-neon-blue/25 bg-transparent'
+            }`}
           size="sm"
         >
           {task.completed && <Check className="w-4 h-4 text-white" />}
@@ -93,7 +91,6 @@ const TaskItem: React.FC<TaskItemProps> = ({
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 className="bg-glass-white border-white/20 text-white placeholder:text-white/60 rounded-lg"
-                autoFocus
               />
               <Textarea
                 value={editDescription}
@@ -153,20 +150,18 @@ const TaskItem: React.FC<TaskItemProps> = ({
           ) : (
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <h3 className={`text-lg font-semibold text-white transition-all duration-300 ${
-                  task.completed ? 'line-through opacity-60' : ''
-                }`}>
+                <h3 className={`text-lg font-semibold bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent transition-all duration-500 ${task.completed ? 'line-through opacity-60' : ''
+                  }`}>
                   {task.title}
                 </h3>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)} transition-all duration-500`}>
                   {getPriorityIcon(task.priority)} {task.priority.toUpperCase()}
                 </span>
               </div>
-              
+
               {task.description && (
-                <p className={`text-white/70 mb-3 transition-all duration-300 ${
-                  task.completed ? 'line-through opacity-50' : ''
-                }`}>
+                <p className={`text-white/80 mb-3 transition-all duration-500 ${task.completed ? 'line-through opacity-50' : ''
+                  }`}>
                   {task.description}
                 </p>
               )}
@@ -176,7 +171,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                   <Calendar className="w-4 h-4" />
                   <span>{formatDate(task.createdAt)}</span>
                 </div>
-                
+
                 {task.dueDate && (
                   <div className={`flex items-center gap-1 ${isOverdue ? 'text-red-400' : ''}`}>
                     <Clock className="w-4 h-4" />
@@ -209,17 +204,22 @@ const TaskItem: React.FC<TaskItemProps> = ({
               <Edit className="w-4 h-4" />
             </Button>
             <Button
-              onClick={() => {
-                if (window.confirm('Are you sure you want to delete this task?')) {
-                  onDeleteTask(task.id);
-                }
-              }}
+              onClick={() => setShowDeleteConfirm(true)}
               size="sm"
               variant="ghost"
               className="text-white/60 hover:text-red-400 hover:bg-white/10 rounded-lg p-2"
             >
               <Trash2 className="w-4 h-4" />
             </Button>
+          </div>
+        )}
+        {showDeleteConfirm && (
+          <div className="absolute top-4 right-4 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl shadow-lg p-4 z-50 flex flex-col items-center gap-2">
+            <span className="text-gray-900 dark:text-white font-semibold mb-2">Are you sure you want to delete this task?</span>
+            <div className="flex gap-2">
+              <Button size="sm" className="bg-red-500 hover:bg-red-600 text-white" onClick={() => { onDeleteTask(task.id); setShowDeleteConfirm(false); }}>Confirm</Button>
+              <Button size="sm" variant="ghost" className="text-gray-700 dark:text-gray-300" onClick={() => setShowDeleteConfirm(false)}>Cancel</Button>
+            </div>
           </div>
         )}
       </div>

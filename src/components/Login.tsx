@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { User, LogIn, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -43,32 +42,32 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="mx-auto w-20 h-20 bg-aurora-gradient rounded-full flex items-center justify-center mb-6 animate-glow">
-            <Sparkles className="w-10 h-10 text-white animate-rotate-slow" />
+          <div className="mx-auto w-20 h-20 bg-aurora-gradient rounded-full flex items-center justify-center mb-6">
+            <Sparkles className="w-10 h-10 text-black dark:text-white" />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent mb-2">
             TaskSpark
           </h1>
-          <p className="text-white/80 text-lg">Your Personal Task Universe</p>
+          <p className="text-gray-800 dark:text-white/80 text-lg">Your Personal Task Universe</p>
         </div>
 
         {/* Login form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
-            <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
+            <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-white/60 w-5 h-5" />
             <Input
               type="text"
               placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="pl-12 h-14 bg-glass-white border-white/20 text-white placeholder:text-white/60 rounded-xl text-lg focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/50 transition-all duration-300"
+              className="pl-12 h-14 bg-glass-white border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/60 rounded-xl text-lg focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/50 transition-all duration-300"
               required
             />
           </div>
 
           <Button
             type="submit"
-            className="w-full h-14 bg-aurora-gradient hover:shadow-lg hover:shadow-neon-purple/25 rounded-xl text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:animate-pulse-neon"
+            className="w-full h-14 bg-aurora-gradient hover:shadow-lg hover:shadow-neon-purple/25 rounded-xl text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
             disabled={!username.trim()}
           >
             <LogIn className="w-5 h-5 mr-2" />
@@ -78,7 +77,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
         {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-white/60 text-sm">
+          <p className="text-gray-500 dark:text-white/60 text-sm">
             Ready to organize your tasks in style? ✨
           </p>
         </div>

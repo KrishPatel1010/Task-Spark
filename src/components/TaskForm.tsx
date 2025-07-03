@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Plus, X, Wand2, Calendar, Flag, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -46,10 +45,10 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center animate-glow">
+            <div className="w-10 h-10 bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] rounded-lg flex items-center justify-center animate-glow">
               <Wand2 className="w-5 h-5 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-white">Create New Task</h2>
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent transition-all duration-500">Create New Task</h2>
           </div>
           <Button
             onClick={onClose}
@@ -64,7 +63,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent text-sm font-medium mb-2 transition-all duration-500">
               Task Title *
             </label>
             <Input
@@ -78,7 +77,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent text-sm font-medium mb-2 transition-all duration-500">
               Description (Optional)
             </label>
             <Textarea
@@ -92,7 +91,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent text-sm font-medium mb-2 transition-all duration-500">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Due Date
               </label>
@@ -105,7 +104,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
             </div>
 
             <div>
-              <label className="block text-white/80 text-sm font-medium mb-2">
+              <label className="block bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent text-sm font-medium mb-2 transition-all duration-500">
                 <Flag className="w-4 h-4 inline mr-1" />
                 Priority
               </label>
@@ -123,7 +122,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-white/80 text-sm font-medium mb-2">
+            <label className="block bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-purple))] bg-clip-text text-transparent text-sm font-medium mb-2 transition-all duration-500">
               <Tag className="w-4 h-4 inline mr-1" />
               Category
             </label>
@@ -133,7 +132,11 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-white/20">
                 {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat} className="text-white">
+                  <SelectItem
+                    key={cat}
+                    value={cat}
+                    className="text-white hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-200"
+                  >
                     {cat}
                   </SelectItem>
                 ))}
