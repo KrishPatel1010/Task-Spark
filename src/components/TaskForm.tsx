@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
-import { Plus, X, Wand2 } from 'lucide-react';
+import { Plus, X, Wand2, Calendar, Flag, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { PriorityType } from '@/types/Task';
 
 interface TaskFormProps {
-  onAddTask: (title: string, description: string) => void;
+  onAddTask: (title: string, description: string, dueDate: string, priority: PriorityType, category: string) => void;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -14,13 +16,21 @@ interface TaskFormProps {
 const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [priority, setPriority] = useState<PriorityType>('medium');
+  const [category, setCategory] = useState('');
+
+  const categories = ['Work', 'Personal', 'Health', 'Education', 'Finance', 'Other'];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onAddTask(title.trim(), description.trim());
+      onAddTask(title.trim(), description.trim(), dueDate, priority, category || 'Other');
       setTitle('');
       setDescription('');
+      setDueDate('');
+      setPriority('medium');
+      setCategory('');
       onClose();
     }
   };
@@ -29,7 +39,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-slideInUp">
-      <div className="glass rounded-2xl p-6 max-w-md w-full shadow-2xl animate-slideInUp relative">
+      <div className="glass rounded-2xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-slideInUp relative">
         {/* Glowing decoration */}
         <div className="absolute -top-4 -right-4 w-8 h-8 bg-neon-pink rounded-full opacity-40 blur-sm animate-pulse"></div>
 
@@ -78,6 +88,57 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, isOpen, onClose }) => {
               className="bg-glass-white border-white/20 text-white placeholder:text-white/60 rounded-xl focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/50 transition-all duration-300 resize-none"
               rows={3}
             />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                <Calendar className="w-4 h-4 inline mr-1" />
+                Due Date
+              </label>
+              <Input
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                className="bg-glass-white border-white/20 text-white rounded-xl focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/50 transition-all duration-300"
+              />
+            </div>
+
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                <Flag className="w-4 h-4 inline mr-1" />
+                Priority
+              </label>
+              <Select value={priority} onValueChange={(value: PriorityType) => setPriority(value)}>
+                <SelectTrigger className="bg-glass-white border-white/20 text-white rounded-xl focus:border-neon-blue">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-slate-800 border-white/20">
+                  <SelectItem value="low" className="text-green-400">🟢 Low</SelectItem>
+                  <SelectItem value="medium" className="text-yellow-400">🟡 Medium</SelectItem>
+                  <SelectItem value="high" className="text-red-400">🔴 High</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-2">
+              <Tag className="w-4 h-4 inline mr-1" />
+              Category
+            </label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger className="bg-glass-white border-white/20 text-white rounded-xl focus:border-neon-blue">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-800 border-white/20">
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat} className="text-white">
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="flex gap-3 pt-4">
