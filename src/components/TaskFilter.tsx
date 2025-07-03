@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { All, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { List, CheckCircle, Clock, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export type FilterType = 'all' | 'completed' | 'pending';
