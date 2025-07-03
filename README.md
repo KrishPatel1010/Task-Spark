@@ -19,8 +19,8 @@ A modern, responsive personal task management app built with React. Easily add, 
 ## 🛠 Setup Instructions
 1. Clone the repository
 2. Run `npm install`
-3. Run `npm start`
-4. Open [http://localhost:3000](http://localhost:3000)
+3. Run `npm run dev`
+4. Open [http://localhost:8080](http://localhost:8080)
 
 ## 🧰 Technologies Used
 - React.js (functional components & hooks)
@@ -28,11 +28,11 @@ A modern, responsive personal task management app built with React. Easily add, 
 - TypeScript
 
 ## 🔗 Live Demo
-[Add your deployed app link here]
+(https://task-spark.vercel.app/)
 
 ## 🖼 Screenshots
-![Login Page](screenshots/login.png)
-![Dashboard](screenshots/dashboard.png)
+![Login Page](public/screenshots/login.png)
+![Dashboard](public/screenshots/dashboard.png)
 
 ---
 
